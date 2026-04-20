@@ -58,30 +58,32 @@ def preview_report_card(doc):
 def get_attendance_count(student, academic_year, academic_term=None):
 	attendance = frappe._dict()
 	attendance.total = 0
+	attendance.present = 0
+	attendance.absent = 0
 
-	if academic_year:
-		from_date, to_date = frappe.db.get_value(
-			"Academic Year", academic_year, ["year_start_date", "year_end_date"]
-		)
-	elif academic_term:
+	if academic_term:
 		from_date, to_date = frappe.db.get_value(
 			"Academic Term", academic_term, ["term_start_date", "term_end_date"]
+		)
+	elif academic_year:
+		from_date, to_date = frappe.db.get_value(
+			"Academic Year", academic_year, ["year_start_date", "year_end_date"]
 		)
 
 	if from_date and to_date:
 		data = frappe.get_all(
 			"Student Attendance",
 			{"student": student, "docstatus": 1, "date": ["between", (from_date, to_date)]},
-			["status", "count(student) as count"],
+			["status", {"COUNT": "student", "as": "counted"}],
 			group_by="status",
 		)
 
 		for row in data:
 			if row.status == "Present":
-				attendance.present = row.count
+				attendance.present = row.counted
 			if row.status == "Absent":
-				attendance.absent = row.count
-			attendance.total += row.count
+				attendance.absent = row.counted
+			attendance.total += row.counted
 		return attendance
 	else:
 		frappe.throw(_("Please enter the Academic Year and set the Start and End date."))
