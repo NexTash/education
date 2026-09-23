@@ -1,0 +1,21 @@
+{
+ "app": "education",
+ "bg_color": "gray",
+ "creation": "2026-09-23 12:00:00.000000",
+ "docstatus": 0,
+ "doctype": "Desktop Icon",
+ "hidden": 0,
+ "icon": "banknote",
+ "icon_type": "App",
+ "idx": 0,
+ "label": "Student Accounts",
+ "link_to": "Student Accounts",
+ "link_type": "Workspace Sidebar",
+ "modified": "2026-09-23 12:00:00.000000",
+ "modified_by": "Administrator",
+ "name": "Student Accounts",
+ "owner": "Administrator",
+ "restrict_removal": 0,
+ "roles": [],
+ "standard": 1
+}

@@ -432,3 +432,70 @@ def check_quiz_completion(quiz, enrollment_name):
 		if result == "Pass":
 			status = True
 	return status, score, result, time_taken
+
+
+def get_default_company():
+	"""Company used when a document does not carry one of its own."""
+	company = frappe.defaults.get_user_default("Company") or frappe.db.get_single_value(
+		"Global Defaults", "default_company"
+	)
+	if not company:
+		companies = frappe.get_all("Company", pluck="name", limit=2)
+		if len(companies) == 1:
+			company = companies[0]
+	return company
+
+
+def is_course_based_billing():
+	"""True when fees are priced from registered courses rather than Fee Structures."""
+	engine = frappe.db.get_single_value("Education Settings", "fee_engine")
+	return (engine or "Course Based") == "Course Based"
+
+
+def get_billing_document_type():
+	"""The document a fee run produces: Fees, Sales Invoice or Sales Order."""
+	if is_course_based_billing():
+		return "Fees"
+
+	settings = frappe.get_cached_doc("Education Settings")
+	if settings.get("billing_document"):
+		return settings.billing_document
+	# Fall back to the pre-existing switch so upgraded sites keep their behaviour.
+	return "Sales Order" if settings.get("create_so") else "Sales Invoice"
+
+
+def get_semester_for_term(program_enrollment, academic_term):
+	"""Semester number a term maps to for one enrollment.
+
+	Falls back to the enrollment's current semester when the study scheme has
+	not been tagged with terms yet.
+	"""
+	if not (program_enrollment and academic_term):
+		return None
+
+	semester = frappe.db.get_value(
+		"Student Study Scheme",
+		{"parent": program_enrollment, "academic_term": academic_term},
+		"semester",
+	)
+	if semester:
+		return semester
+
+	return frappe.db.get_value(
+		"Program Enrollment", program_enrollment, "current_semester"
+	)
+
+
+def is_first_term_of_academic_year(academic_term, academic_year):
+	"""True when this is the earliest term in its academic year."""
+	if not (academic_term and academic_year):
+		return False
+
+	first_term = frappe.get_all(
+		"Academic Term",
+		filters={"academic_year": academic_year},
+		order_by="term_start_date asc",
+		limit=1,
+		pluck="name",
+	)
+	return bool(first_term) and first_term[0] == academic_term

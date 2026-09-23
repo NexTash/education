@@ -260,12 +260,16 @@ def get_fee_schedule(program, student_category=None):
 
 
 @frappe.whitelist()
-def collect_fees(fees, amt):
-	paid_amount = flt(amt) + flt(frappe.db.get_value("Fees", fees, "paid_amount"))
-	total_amount = flt(frappe.db.get_value("Fees", fees, "total_amount"))
-	frappe.db.set_value("Fees", fees, "paid_amount", paid_amount)
-	frappe.db.set_value("Fees", fees, "outstanding_amount", (total_amount - paid_amount))
-	return paid_amount
+def collect_fees(fees, amt=None):
+	"""Restate a fee's paid and outstanding amounts from the general ledger.
+
+	The amount is never written directly: money only moves through a Payment
+	Entry, and this recomputes the derived fields from what the ledger says.
+	"""
+	from education.education.doctype.fees.fees import update_fee_status
+
+	update_fee_status(fees)
+	return flt(frappe.db.get_value("Fees", fees, "paid_amount"))
 
 
 @frappe.whitelist()

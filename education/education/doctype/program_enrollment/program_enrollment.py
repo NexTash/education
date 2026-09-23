@@ -7,11 +7,13 @@ from frappe import _, msgprint
 from frappe.desk.reportview import get_match_cond
 from frappe.model.document import Document
 from frappe.query_builder.functions import Min
-from frappe.utils import comma_and, get_link_to_form, getdate
+from frappe.utils import cint, comma_and, flt, get_link_to_form, getdate
+from education.education.doctype.fee_plan.fee_plan import get_applicable_fee_plan
 from education.education.doctype.fee_schedule.fee_schedule import (
 	create_sales_invoice,
 	create_sales_order,
 )
+from education.education.utils import get_default_company, is_course_based_billing
 
 
 class ProgramEnrollment(Document):
@@ -21,6 +23,83 @@ class ProgramEnrollment(Document):
 
 		if not self.courses:
 			self.extend("courses", self.get_courses())
+
+		self.set_fee_plan()
+		self.set_study_scheme()
+		self.calculate_total_credit_hours()
+
+	def set_fee_plan(self):
+		"""Stamp the rate card in force on the enrollment date.
+
+		Resolved once and never re-resolved, so a 2020 intake keeps its 2020
+		prices even after newer plans are published.
+		"""
+		if self.fee_plan or self.docstatus != 0:
+			return
+
+		self.fee_plan = get_applicable_fee_plan(
+			program=self.program,
+			student_category=self.student_category,
+			company=get_default_company(),
+			on_date=self.enrollment_date,
+			academic_year=self.academic_year,
+		)
+
+		if not self.fee_plan and is_course_based_billing():
+			frappe.msgprint(
+				_(
+					"No Fee Plan applies to {0} on {1}. Fees for this student cannot be priced until one is submitted."
+				).format(frappe.bold(self.program), frappe.bold(self.enrollment_date)),
+				alert=True,
+			)
+
+	def set_study_scheme(self):
+		"""Freeze the program's curriculum onto the enrollment."""
+		if self.study_scheme or self.docstatus != 0:
+			return
+
+		scheme = frappe.get_all(
+			"Program Study Scheme",
+			filters={"parent": self.program, "parenttype": "Program"},
+			fields=[
+				"semester",
+				"course",
+				"course_name",
+				"credit_hours",
+				"course_type",
+				"required",
+				"fee_override",
+			],
+			order_by="semester asc, idx asc",
+		)
+
+		for row in scheme:
+			self.append("study_scheme", dict(row, status="Planned"))
+
+	def calculate_total_credit_hours(self):
+		self.total_credit_hours = sum(flt(row.credit_hours) for row in self.study_scheme)
+
+	@frappe.whitelist()
+	def refresh_study_scheme_from_program(self):
+		"""Explicit, deliberate re-sync. Fee overrides already frozen are kept."""
+		frozen = {(cint(r.semester), r.course): r for r in self.study_scheme}
+		self.set("study_scheme", [])
+		self.set_study_scheme()
+
+		for row in self.study_scheme:
+			previous = frozen.get((cint(row.semester), row.course))
+			if previous:
+				row.status = previous.status
+				row.academic_term = previous.academic_term
+				if flt(previous.fee_override):
+					row.fee_override = previous.fee_override
+
+		self.calculate_total_credit_hours()
+		self.save()
+		return len(self.study_scheme)
+
+	def get_scheme_rows(self, semester):
+		return [row for row in self.study_scheme if cint(row.semester) == cint(semester)]
 
 	def set_student_name(self):
 		if not self.student_name:
@@ -62,7 +141,13 @@ class ProgramEnrollment(Document):
 			frappe.db.set_value("Student", self.student, "joining_date", date[0].enrollment_date)
 
 	def make_fee_records(self):
-		from education.education.api import get_fee_components
+		"""Legacy structure-based billing.
+
+		Course-based billing raises fees from Course Registration instead, so
+		this is skipped entirely when that engine is on.
+		"""
+		if is_course_based_billing():
+			return
 
 		create_so = frappe.db.get_single_value("Education Settings", "create_so")
 

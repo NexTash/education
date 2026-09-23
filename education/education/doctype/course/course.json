@@ -9,11 +9,17 @@
  "field_order": [
   "course_name",
   "department",
+  "credit_hours",
   "hero_image",
   "column_break_tflc",
   "description",
   "section_break_6",
   "topics",
+  "fee_section",
+  "fee_basis",
+  "default_course_fee",
+  "column_break_fee",
+  "fee_category",
   "assessment_tab",
   "assessment",
   "default_grading_scale",
@@ -88,6 +94,45 @@
    "fieldtype": "Tab Break",
    "label": "Connections",
    "show_dashboard": 1
+  },
+  {
+   "fieldname": "credit_hours",
+   "fieldtype": "Float",
+   "label": "Credit Hours",
+   "in_list_view": 1,
+   "description": "Used by the Per Credit Hour tuition basis.",
+   "precision": "2"
+  },
+  {
+   "fieldname": "fee_section",
+   "fieldtype": "Section Break",
+   "label": "Fees"
+  },
+  {
+   "fieldname": "fee_basis",
+   "fieldtype": "Select",
+   "label": "Fee Basis",
+   "options": "Per Credit Hour\nPer Course",
+   "default": "Per Credit Hour",
+   "description": "Per Credit Hour multiplies the applicable rate by Credit Hours. Per Course charges a flat amount."
+  },
+  {
+   "fieldname": "default_course_fee",
+   "fieldtype": "Currency",
+   "label": "Default Course Fee",
+   "depends_on": "eval:doc.fee_basis=='Per Course'",
+   "description": "Fallback list price, used when no Fee Plan rate applies."
+  },
+  {
+   "fieldname": "column_break_fee",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "fee_category",
+   "fieldtype": "Link",
+   "label": "Fee Category",
+   "options": "Fee Category",
+   "description": "Income account used when tuition for this course is billed."
   }
  ],
  "image_field": "hero_image",

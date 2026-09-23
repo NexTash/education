@@ -1,0 +1,426 @@
+{
+ "charts": [],
+ "content": "[{\"id\": \"e0_TzKZqGw\", \"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"id\": \"BfPLobj59Q\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>Your Shortcuts</b></span>\", \"col\": 12}}, {\"id\": \"lQNFSI3Q15\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Fees\", \"col\": 3}}, {\"id\": \"jdVRwSZf7U\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Course Registration\", \"col\": 3}}, {\"id\": \"WwzbO68duJ\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Fee Generation Tool\", \"col\": 3}}, {\"id\": \"kh7cKQwP41\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Fee Plan\", \"col\": 3}}, {\"id\": \"AcJH496rS0\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Payment Entry\", \"col\": 3}}, {\"id\": \"97zsPmmjc8\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Accounts Receivable\", \"col\": 3}}, {\"id\": \"stLedgerSc\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Student Ledger\", \"col\": 3}}, {\"id\": \"lyLCf4weAK\", \"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"id\": \"i2KQ8VsxP8\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>Masters &amp; Reports</b></span>\", \"col\": 12}}, {\"id\": \"_QYR3A8uM5\", \"type\": \"card\", \"data\": {\"card_name\": \"Fee Setup\", \"col\": 4}}, {\"id\": \"x3RSLJSGBs\", \"type\": \"card\", \"data\": {\"card_name\": \"Billing\", \"col\": 4}}, {\"id\": \"b7iC1ZK_th\", \"type\": \"card\", \"data\": {\"card_name\": \"Payments\", \"col\": 4}}, {\"id\": \"A23K7MOzqA\", \"type\": \"card\", \"data\": {\"card_name\": \"Banking\", \"col\": 4}}, {\"id\": \"A44C-xmjA7\", \"type\": \"card\", \"data\": {\"card_name\": \"Accounting Masters\", \"col\": 4}}, {\"id\": \"UQ4SLQMUPv\", \"type\": \"card\", \"data\": {\"card_name\": \"Fee Reports\", \"col\": 4}}, {\"id\": \"Qf_tl4PTrd\", \"type\": \"card\", \"data\": {\"card_name\": \"Financial Reports\", \"col\": 4}}, {\"id\": \"anT5Wyfzce\", \"type\": \"card\", \"data\": {\"card_name\": \"Settings\", \"col\": 4}}]",
+ "creation": "2026-09-23 12:00:00.000000",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "banknote",
+ "idx": 0,
+ "is_hidden": 0,
+ "label": "Student Accounts",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Fee Setup",
+   "link_count": 2,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Fee Plan",
+   "link_count": 0,
+   "link_to": "Fee Plan",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Fee Category",
+   "link_count": 0,
+   "link_to": "Fee Category",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Billing",
+   "link_count": 3,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Course Registration",
+   "link_count": 0,
+   "link_to": "Course Registration",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Fees",
+   "link_count": 0,
+   "link_to": "Fees",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Fee Generation Tool",
+   "link_count": 0,
+   "link_to": "Fee Generation Tool",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Payments",
+   "link_count": 4,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Payment Entry",
+   "link_count": 0,
+   "link_to": "Payment Entry",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Payment Request",
+   "link_count": 0,
+   "link_to": "Payment Request",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Journal Entry",
+   "link_count": 0,
+   "link_to": "Journal Entry",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Mode of Payment",
+   "link_count": 0,
+   "link_to": "Mode of Payment",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Banking",
+   "link_count": 4,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Bank Statement Import",
+   "link_count": 0,
+   "link_to": "Bank Statement Import",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Bank Reconciliation Tool",
+   "link_count": 0,
+   "link_to": "Bank Reconciliation Tool",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Bank Account",
+   "link_count": 0,
+   "link_to": "Bank Account",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Bank",
+   "link_count": 0,
+   "link_to": "Bank",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Accounting Masters",
+   "link_count": 3,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Company",
+   "link_count": 0,
+   "link_to": "Company",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Chart of Accounts",
+   "link_count": 0,
+   "link_to": "Account",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Cost Center",
+   "link_count": 0,
+   "link_to": "Cost Center",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Fee Reports",
+   "link_count": 3,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "Fees",
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Student Ledger",
+   "link_count": 0,
+   "link_to": "Student Ledger",
+   "link_type": "Report",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "dependencies": "Fees",
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Student Fee Collection",
+   "link_count": 0,
+   "link_to": "Student Fee Collection",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "Fees",
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Program wise Fee Collection",
+   "link_count": 0,
+   "link_to": "Program wise Fee Collection",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Financial Reports",
+   "link_count": 4,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "GL Entry",
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "General Ledger",
+   "link_count": 0,
+   "link_to": "General Ledger",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "Sales Invoice",
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Accounts Receivable",
+   "link_count": 0,
+   "link_to": "Accounts Receivable",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "Sales Invoice",
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Accounts Receivable Summary",
+   "link_count": 0,
+   "link_to": "Accounts Receivable Summary",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "GL Entry",
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Trial Balance",
+   "link_count": 0,
+   "link_to": "Trial Balance",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Settings",
+   "link_count": 2,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Education Settings",
+   "link_count": 0,
+   "link_to": "Education Settings",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Accounts Settings",
+   "link_count": 0,
+   "link_to": "Accounts Settings",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  }
+ ],
+ "modified": "2026-09-23 16:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Education",
+ "name": "Student Accounts",
+ "number_cards": [],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [],
+ "restrict_to_domain": "",
+ "roles": [],
+ "sequence_id": 11.0,
+ "shortcuts": [
+  {
+   "color": "Red",
+   "format": "{} Unpaid",
+   "label": "Fees",
+   "link_to": "Fees",
+   "stats_filter": "[[\"Fees\",\"status\",\"in\",[\"Unpaid\",\"Overdue\",\"Partly Paid\"],false]]",
+   "type": "DocType"
+  },
+  {
+   "color": "Orange",
+   "format": "{} To Bill",
+   "label": "Course Registration",
+   "link_to": "Course Registration",
+   "stats_filter": "[[\"Course Registration\",\"status\",\"=\",\"Registered\",false]]",
+   "type": "DocType"
+  },
+  {
+   "color": "Blue",
+   "format": "",
+   "label": "Student Ledger",
+   "link_to": "Student Ledger",
+   "stats_filter": "",
+   "type": "Report"
+  },
+  {
+   "color": "Grey",
+   "format": "",
+   "label": "Fee Generation Tool",
+   "link_to": "Fee Generation Tool",
+   "stats_filter": "",
+   "type": "DocType"
+  },
+  {
+   "color": "Green",
+   "format": "{} Active",
+   "label": "Fee Plan",
+   "link_to": "Fee Plan",
+   "stats_filter": "[[\"Fee Plan\",\"disabled\",\"=\",0,false],[\"Fee Plan\",\"docstatus\",\"=\",1,false]]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "format": "",
+   "label": "Payment Entry",
+   "link_to": "Payment Entry",
+   "stats_filter": "",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "format": "",
+   "label": "Accounts Receivable",
+   "link_to": "Accounts Receivable",
+   "stats_filter": "",
+   "type": "Report"
+  }
+ ],
+ "title": "Student Accounts"
+}

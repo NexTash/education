@@ -1,0 +1,294 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "allow_rename": 1,
+ "autoname": "field:plan_name",
+ "creation": "2026-09-23 10:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "plan_name",
+  "program",
+  "student_category",
+  "column_break_applicability",
+  "intake_academic_year",
+  "effective_from",
+  "effective_till",
+  "disabled",
+  "section_break_tuition",
+  "tuition_basis",
+  "rate_per_credit_hour",
+  "flat_semester_tuition",
+  "column_break_tuition",
+  "repeat_course_rate",
+  "elective_course_rate",
+  "section_break_overrides",
+  "course_rate_overrides",
+  "section_break_components",
+  "components",
+  "accounts_tab",
+  "company",
+  "currency",
+  "receivable_account",
+  "column_break_accounts",
+  "income_account",
+  "cost_center",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "plan_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Plan Name",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "description": "Leave blank to apply this plan to every program. A plan naming a program always wins over a blank one.",
+   "fieldname": "program",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Program",
+   "options": "Program"
+  },
+  {
+   "description": "Leave blank to apply to every student category.",
+   "fieldname": "student_category",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Student Category",
+   "options": "Student Category"
+  },
+  {
+   "fieldname": "column_break_applicability",
+   "fieldtype": "Column Break"
+  },
+  {
+   "description": "Restricts the plan to students whose enrollment falls in this academic year. Leave blank to rely on the effective dates alone.",
+   "fieldname": "intake_academic_year",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Intake Academic Year",
+   "options": "Academic Year"
+  },
+  {
+   "fieldname": "effective_from",
+   "fieldtype": "Date",
+   "label": "Effective From",
+   "reqd": 1
+  },
+  {
+   "description": "Leave blank for an open-ended plan.",
+   "fieldname": "effective_till",
+   "fieldtype": "Date",
+   "label": "Effective Till"
+  },
+  {
+   "default": "0",
+   "fieldname": "disabled",
+   "fieldtype": "Check",
+   "label": "Disabled"
+  },
+  {
+   "fieldname": "section_break_tuition",
+   "fieldtype": "Section Break",
+   "label": "Tuition"
+  },
+  {
+   "default": "Per Credit Hour",
+   "description": "How tuition for the registered courses is priced. Components Only bills nothing per course; every charge comes from the Fee Components table.",
+   "fieldname": "tuition_basis",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Tuition Basis",
+   "options": "Per Credit Hour\nPer Course\nFlat per Semester\nComponents Only",
+   "reqd": 1
+  },
+  {
+   "depends_on": "eval:doc.tuition_basis=='Per Credit Hour'",
+   "fieldname": "rate_per_credit_hour",
+   "fieldtype": "Currency",
+   "label": "Rate per Credit Hour",
+   "options": "currency"
+  },
+  {
+   "depends_on": "eval:doc.tuition_basis=='Flat per Semester'",
+   "description": "Charged once per semester regardless of how many courses the student registers.",
+   "fieldname": "flat_semester_tuition",
+   "fieldtype": "Currency",
+   "label": "Flat Semester Tuition",
+   "options": "currency"
+  },
+  {
+   "fieldname": "column_break_tuition",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "100",
+   "description": "Percentage of the normal rate charged when a student repeats a course.",
+   "fieldname": "repeat_course_rate",
+   "fieldtype": "Percent",
+   "label": "Repeat Course Rate",
+   "depends_on": "eval:doc.tuition_basis!='Components Only'"
+  },
+  {
+   "default": "100",
+   "description": "Percentage of the normal rate charged for elective courses.",
+   "fieldname": "elective_course_rate",
+   "fieldtype": "Percent",
+   "label": "Elective Course Rate",
+   "depends_on": "eval:doc.tuition_basis!='Components Only'"
+  },
+  {
+   "collapsible": 1,
+   "description": "Exceptions only. Courses listed here ignore the tuition basis above.",
+   "fieldname": "section_break_overrides",
+   "fieldtype": "Section Break",
+   "label": "Course Rate Overrides",
+   "depends_on": "eval:doc.tuition_basis!='Components Only'"
+  },
+  {
+   "fieldname": "course_rate_overrides",
+   "fieldtype": "Table",
+   "label": "Course Rate Overrides",
+   "options": "Fee Plan Course Rate"
+  },
+  {
+   "description": "Non-tuition charges such as enrollment fee, semester change fee, library and examination fees.",
+   "fieldname": "section_break_components",
+   "fieldtype": "Section Break",
+   "label": "Fee Components"
+  },
+  {
+   "fieldname": "components",
+   "fieldtype": "Table",
+   "label": "Components",
+   "options": "Fee Plan Component"
+  },
+  {
+   "fieldname": "accounts_tab",
+   "fieldtype": "Tab Break",
+   "label": "Accounts"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "remember_last_selected_value": 1,
+   "reqd": 1
+  },
+  {
+   "fetch_from": "company.default_currency",
+   "fetch_if_empty": 1,
+   "fieldname": "currency",
+   "fieldtype": "Link",
+   "label": "Currency",
+   "options": "Currency"
+  },
+  {
+   "fieldname": "receivable_account",
+   "fieldtype": "Link",
+   "label": "Receivable Account",
+   "options": "Account",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_accounts",
+   "fieldtype": "Column Break"
+  },
+  {
+   "description": "Fallback tuition income account, used when a course has no Fee Category of its own.",
+   "fieldname": "income_account",
+   "fieldtype": "Link",
+   "label": "Default Income Account",
+   "options": "Account"
+  },
+  {
+   "fieldname": "cost_center",
+   "fieldtype": "Link",
+   "label": "Cost Center",
+   "options": "Cost Center"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Fee Plan",
+   "print_hide": 1,
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [
+  {
+   "group": "Enrollment",
+   "link_doctype": "Program Enrollment",
+   "link_fieldname": "fee_plan"
+  },
+  {
+   "group": "Fee",
+   "link_doctype": "Fees",
+   "link_fieldname": "fee_plan"
+  }
+ ],
+ "modified": "2026-09-23 10:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Education",
+ "name": "Fee Plan",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Academics User",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Accounts User",
+   "share": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "search_fields": "program,intake_academic_year",
+ "show_name_in_global_search": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

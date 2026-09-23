@@ -1,0 +1,347 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "autoname": "naming_series:",
+ "creation": "2026-09-23 10:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "student",
+  "student_name",
+  "program_enrollment",
+  "program",
+  "column_break_header",
+  "academic_year",
+  "academic_term",
+  "semester",
+  "registration_date",
+  "status",
+  "section_break_courses",
+  "courses",
+  "section_break_totals",
+  "total_courses",
+  "total_credit_hours",
+  "column_break_totals",
+  "tuition_amount",
+  "component_amount",
+  "grand_total",
+  "section_break_components",
+  "components",
+  "billing_tab",
+  "fee_plan",
+  "tuition_basis",
+  "is_admission",
+  "column_break_billing",
+  "company",
+  "currency",
+  "event_charges",
+  "section_break_fee",
+  "fee",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "EDU-CRG-.YYYY.-",
+   "reqd": 1
+  },
+  {
+   "fieldname": "student",
+   "fieldtype": "Link",
+   "in_global_search": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Student",
+   "options": "Student",
+   "reqd": 1,
+   "search_index": 1
+  },
+  {
+   "fetch_from": "student.student_name",
+   "fieldname": "student_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Student Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "program_enrollment",
+   "fieldtype": "Link",
+   "label": "Program Enrollment",
+   "options": "Program Enrollment",
+   "reqd": 1,
+   "search_index": 1
+  },
+  {
+   "fetch_from": "program_enrollment.program",
+   "fieldname": "program",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Program",
+   "options": "Program",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_header",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "academic_year",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Academic Year",
+   "options": "Academic Year",
+   "reqd": 1
+  },
+  {
+   "fieldname": "academic_term",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Academic Term",
+   "options": "Academic Term",
+   "reqd": 1
+  },
+  {
+   "default": "1",
+   "description": "Which semester of the program this registration covers. Drives which scheme rows and which fee components apply.",
+   "fieldname": "semester",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Semester",
+   "reqd": 1
+  },
+  {
+   "default": "Today",
+   "fieldname": "registration_date",
+   "fieldtype": "Date",
+   "label": "Registration Date",
+   "reqd": 1
+  },
+  {
+   "default": "Draft",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "no_copy": 1,
+   "options": "Draft\nRegistered\nBilled\nCancelled",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_courses",
+   "fieldtype": "Section Break",
+   "label": "Registered Courses"
+  },
+  {
+   "fieldname": "courses",
+   "fieldtype": "Table",
+   "label": "Courses",
+   "options": "Course Registration Course",
+   "description": "Filled automatically from the student's study scheme for this semester. Add or remove rows freely."
+  },
+  {
+   "fieldname": "section_break_totals",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "total_courses",
+   "fieldtype": "Int",
+   "label": "Total Courses",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_credit_hours",
+   "fieldtype": "Float",
+   "label": "Total Credit Hours",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_totals",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "tuition_amount",
+   "fieldtype": "Currency",
+   "label": "Tuition Amount",
+   "options": "currency",
+   "read_only": 1
+  },
+  {
+   "fieldname": "component_amount",
+   "fieldtype": "Currency",
+   "label": "Other Components",
+   "options": "currency",
+   "read_only": 1
+  },
+  {
+   "bold": 1,
+   "fieldname": "grand_total",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Grand Total",
+   "options": "currency",
+   "read_only": 1
+  },
+  {
+   "collapsible": 1,
+   "description": "Non-tuition charges resolved from the Fee Plan for this semester.",
+   "fieldname": "section_break_components",
+   "fieldtype": "Section Break",
+   "label": "Fee Components"
+  },
+  {
+   "fieldname": "components",
+   "fieldtype": "Table",
+   "label": "Components",
+   "options": "Fee Component"
+  },
+  {
+   "fieldname": "billing_tab",
+   "fieldtype": "Tab Break",
+   "label": "Billing"
+  },
+  {
+   "fieldname": "fee_plan",
+   "fieldtype": "Link",
+   "label": "Fee Plan",
+   "options": "Fee Plan",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "fee_plan.tuition_basis",
+   "fieldname": "tuition_basis",
+   "fieldtype": "Data",
+   "label": "Tuition Basis",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "description": "Ticked automatically for a student's first registration, so Once at Admission components are charged.",
+   "fieldname": "is_admission",
+   "fieldtype": "Check",
+   "label": "Is Admission"
+  },
+  {
+   "fieldname": "column_break_billing",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "company.default_currency",
+   "fetch_if_empty": 1,
+   "fieldname": "currency",
+   "fieldtype": "Link",
+   "label": "Currency",
+   "options": "Currency",
+   "read_only": 1
+  },
+  {
+   "description": "Event charges to apply, such as Semester Change or Late Registration. Matched against the Fee Plan components.",
+   "fieldname": "event_charges",
+   "fieldtype": "Small Text",
+   "label": "Event Charges"
+  },
+  {
+   "fieldname": "section_break_fee",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "fee",
+   "fieldtype": "Link",
+   "label": "Fee",
+   "no_copy": 1,
+   "options": "Fees",
+   "read_only": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Course Registration",
+   "print_hide": 1,
+   "read_only": 1
+  }
+ ],
+ "is_submittable": 1,
+ "links": [
+  {
+   "group": "Fee",
+   "link_doctype": "Fees",
+   "link_fieldname": "course_registration"
+  }
+ ],
+ "modified": "2026-09-23 15:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Education",
+ "name": "Course Registration",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Academics User",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Accounts User",
+   "share": 1
+  },
+  {
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "Student",
+   "share": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "search_fields": "student,student_name,academic_term",
+ "show_name_in_global_search": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "student_name",
+ "track_changes": 1
+}

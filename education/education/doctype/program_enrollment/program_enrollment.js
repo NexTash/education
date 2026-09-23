@@ -3,6 +3,10 @@
 
 frappe.ui.form.on('Program Enrollment', {
   onload: function (frm) {
+    frm.set_query('fee_plan', function () {
+      return { filters: { docstatus: 1, disabled: 0 } }
+    })
+
     frm.set_query('academic_term', function () {
       return {
         filters: {
@@ -39,9 +43,51 @@ frappe.ui.form.on('Program Enrollment', {
     // });
   },
 
-  refresh: function(frm) {
+  refresh: function (frm) {
     if (!frm.program_courses?.length && frm.doc.program) {
-      frm.events.set_program_courses(frm);
+      frm.events.set_program_courses(frm)
+    }
+
+    if (frm.is_new()) return
+
+    if (frm.doc.program) {
+      frm.add_custom_button(__('Refresh Study Scheme from Program'), function () {
+        frappe.confirm(
+          __(
+            'This replaces the frozen study scheme with the current curriculum. Fees already charged are unaffected. Continue?'
+          ),
+          function () {
+            frm.call('refresh_study_scheme_from_program').then((r) => {
+              frm.refresh_field('study_scheme')
+              frappe.show_alert({
+                message: __('{0} row(s) in the study scheme', [r.message || 0]),
+                indicator: 'green',
+              })
+            })
+          }
+        )
+      })
+    }
+
+    if (frm.doc.docstatus === 1) {
+      frm.add_custom_button(__('Course Registration'), function () {
+        frappe.new_doc('Course Registration', {
+          student: frm.doc.student,
+          program_enrollment: frm.doc.name,
+          academic_year: frm.doc.academic_year,
+          semester: frm.doc.current_semester || 1,
+        })
+      }, __('Create'))
+
+      frm.add_custom_button(__('Registrations'), function () {
+        frappe.set_route('List', 'Course Registration', {
+          program_enrollment: frm.doc.name,
+        })
+      }, __('View'))
+
+      frm.add_custom_button(__('Fees'), function () {
+        frappe.set_route('List', 'Fees', { program_enrollment: frm.doc.name })
+      }, __('View'))
     }
   },
 

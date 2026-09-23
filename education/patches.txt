@@ -17,3 +17,10 @@ education.patches.v15_0.create_fee_component_item_group
 education.patches.v15_0.create_student_customer_group
 education.patches.v15_0.create_custom_permissions
 education.patches.v15_0.create_guardian_role
+education.patches.v16_0.create_program_study_scheme
+education.patches.v16_0.create_fee_plans_from_fee_structures
+education.patches.v16_0.set_fee_plan_on_program_enrollment
+education.patches.v16_0.set_fees_status
+education.patches.v16_0.set_education_billing_defaults
+education.patches.v16_0.set_fee_challan_defaults
+education.patches.v16_0.repair_fees_outstanding

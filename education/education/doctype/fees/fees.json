@@ -18,22 +18,34 @@
   "posting_time",
   "due_date",
   "set_posting_time",
+  "status",
   "student_details",
   "program_enrollment",
   "program",
   "column_break_16",
   "academic_year",
   "academic_term",
+  "semester",
   "section_break_7",
+  "fee_plan",
+  "course_registration",
   "fee_structure",
   "fee_schedule",
   "currency",
+  "section_break_tuition",
+  "tuition_items",
+  "total_tuition",
+  "section_break_components_label",
   "components",
   "section_break_10",
   "amended_from",
   "column_break_11",
+  "total_credit_hours",
+  "total_components",
+  "discount_amount",
   "grand_total",
   "grand_total_in_words",
+  "paid_amount",
   "outstanding_amount",
   "student_details_tab",
   "contact_email",
@@ -217,14 +229,14 @@
    "label": "Fee Structure",
    "options": "Fee Structure",
    "print_hide": 1,
-   "reqd": 1
+   "depends_on": "eval:!doc.fee_plan",
+   "description": "Structure-based billing only."
   },
   {
    "fieldname": "components",
    "fieldtype": "Table",
    "label": "Components",
-   "options": "Fee Component",
-   "reqd": 1
+   "options": "Fee Component"
   },
   {
    "fieldname": "section_break_10",
@@ -314,7 +326,8 @@
    "fieldtype": "Link",
    "label": "Income Account",
    "options": "Account",
-   "print_hide": 1
+   "print_hide": 1,
+   "description": "Fallback account. Rows carrying their own Fee Category post to that category's account instead."
   },
   {
    "fieldname": "column_break_39",
@@ -365,6 +378,91 @@
    "label": "Student Email",
    "options": "Email",
    "print_hide": 1
+  },
+  {
+   "fieldname": "semester",
+   "fieldtype": "Int",
+   "label": "Semester",
+   "read_only": 1
+  },
+  {
+   "fieldname": "fee_plan",
+   "fieldtype": "Link",
+   "label": "Fee Plan",
+   "options": "Fee Plan",
+   "read_only": 1
+  },
+  {
+   "fieldname": "course_registration",
+   "fieldtype": "Link",
+   "label": "Course Registration",
+   "options": "Course Registration",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "total_credit_hours",
+   "fieldtype": "Float",
+   "label": "Total Credit Hours",
+   "read_only": 1,
+   "precision": "2"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "no_copy": 1,
+   "read_only": 1,
+   "default": "Draft",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "options": "Draft\nUnpaid\nPartly Paid\nPaid\nOverdue\nCancelled"
+  },
+  {
+   "fieldname": "section_break_tuition",
+   "fieldtype": "Section Break",
+   "label": "Tuition"
+  },
+  {
+   "fieldname": "tuition_items",
+   "fieldtype": "Table",
+   "label": "Tuition",
+   "options": "Fees Course Item",
+   "description": "Course-wise tuition. Each row posts to its own income account."
+  },
+  {
+   "fieldname": "total_tuition",
+   "fieldtype": "Currency",
+   "label": "Total Tuition",
+   "options": "currency",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_components_label",
+   "fieldtype": "Section Break",
+   "label": "Other Components"
+  },
+  {
+   "fieldname": "total_components",
+   "fieldtype": "Currency",
+   "label": "Total Components",
+   "options": "currency",
+   "read_only": 1
+  },
+  {
+   "fieldname": "discount_amount",
+   "fieldtype": "Currency",
+   "label": "Discount Amount",
+   "options": "currency",
+   "read_only": 1
+  },
+  {
+   "fieldname": "paid_amount",
+   "fieldtype": "Currency",
+   "label": "Paid Amount",
+   "options": "currency",
+   "read_only": 1,
+   "no_copy": 1
   }
  ],
  "in_create": 1,
@@ -423,5 +521,6 @@
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],
- "title_field": "student_name"
+ "title_field": "student_name",
+ "default_print_format": "HU Fee Voucher"
 }

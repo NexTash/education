@@ -1,0 +1,213 @@
+{
+ "charts": [],
+ "content": "[{\"id\": \"3g2hru0jsF\", \"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"id\": \"-5CDgku7GP\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>Your Shortcuts</b></span>\", \"col\": 12}}, {\"id\": \"vC9LOOxbZq\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Program\", \"col\": 3}}, {\"id\": \"9-lCoZgbR5\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Course\", \"col\": 3}}, {\"id\": \"wSA8v8CQOd\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Student\", \"col\": 3}}, {\"id\": \"f7074u6t7a\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Program Enrollment\", \"col\": 3}}, {\"id\": \"wdNQ-UVzy-\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Course Registration\", \"col\": 3}}, {\"id\": \"w7hn_aNfd0\", \"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"id\": \"lSS2WPuZKM\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>Configuration</b></span>\", \"col\": 12}}, {\"id\": \"tFrWFUIPzF\", \"type\": \"card\", \"data\": {\"card_name\": \"Curriculum\", \"col\": 4}}, {\"id\": \"18kVk2jJKn\", \"type\": \"card\", \"data\": {\"card_name\": \"Academic Calendar\", \"col\": 4}}, {\"id\": \"UULlZuZ9vF\", \"type\": \"card\", \"data\": {\"card_name\": \"Students & Enrollment\", \"col\": 4}}, {\"id\": \"L7pivuF2Ww\", \"type\": \"card\", \"data\": {\"card_name\": \"Setup\", \"col\": 4}}]",
+ "creation": "2026-09-23 12:00:00.000000",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "graduation-cap",
+ "idx": 0,
+ "is_hidden": 0,
+ "label": "Registrar",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Curriculum",
+   "link_count": 2,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Program",
+   "link_count": 0,
+   "link_to": "Program",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Course",
+   "link_count": 0,
+   "link_to": "Course",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Academic Calendar",
+   "link_count": 2,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Academic Year",
+   "link_count": 0,
+   "link_to": "Academic Year",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Academic Term",
+   "link_count": 0,
+   "link_to": "Academic Term",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Students & Enrollment",
+   "link_count": 4,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Student",
+   "link_count": 0,
+   "link_to": "Student",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Program Enrollment",
+   "link_count": 0,
+   "link_to": "Program Enrollment",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Course Registration",
+   "link_count": 0,
+   "link_to": "Course Registration",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Course Enrollment",
+   "link_count": 0,
+   "link_to": "Course Enrollment",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Setup",
+   "link_count": 2,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Student Category",
+   "link_count": 0,
+   "link_to": "Student Category",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Education Settings",
+   "link_count": 0,
+   "link_to": "Education Settings",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  }
+ ],
+ "modified": "2026-09-23 13:30:00.000000",
+ "modified_by": "Administrator",
+ "module": "Education",
+ "name": "Registrar",
+ "number_cards": [],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [],
+ "restrict_to_domain": "",
+ "roles": [],
+ "sequence_id": 10.0,
+ "shortcuts": [
+  {
+   "color": "Grey",
+   "format": "",
+   "label": "Program",
+   "link_to": "Program",
+   "stats_filter": "",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "format": "",
+   "label": "Course",
+   "link_to": "Course",
+   "stats_filter": "",
+   "type": "DocType"
+  },
+  {
+   "color": "Green",
+   "format": "{} Active",
+   "label": "Student",
+   "link_to": "Student",
+   "stats_filter": "{\n    \"enabled\": 1\n}",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "format": "",
+   "label": "Program Enrollment",
+   "link_to": "Program Enrollment",
+   "stats_filter": "",
+   "type": "DocType"
+  },
+  {
+   "color": "Orange",
+   "format": "{} Registered",
+   "label": "Course Registration",
+   "link_to": "Course Registration",
+   "stats_filter": "[[\"Course Registration\",\"status\",\"=\",\"Registered\",false]]",
+   "type": "DocType"
+  }
+ ],
+ "title": "Registrar"
+}

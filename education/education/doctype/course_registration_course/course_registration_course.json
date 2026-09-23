@@ -1,0 +1,133 @@
+{
+ "actions": [],
+ "creation": "2026-09-23 10:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "course",
+  "course_name",
+  "credit_hours",
+  "course_type",
+  "status",
+  "is_repeat",
+  "column_break_reg_course",
+  "fee_basis",
+  "rate",
+  "amount",
+  "fee_category",
+  "rate_source",
+  "scheme_semester"
+ ],
+ "fields": [
+  {
+   "columns": 2,
+   "fieldname": "course",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Course",
+   "options": "Course",
+   "reqd": 1
+  },
+  {
+   "columns": 2,
+   "fetch_from": "course.course_name",
+   "fieldname": "course_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Course Name",
+   "read_only": 1
+  },
+  {
+   "columns": 1,
+   "fetch_from": "course.credit_hours",
+   "fetch_if_empty": 1,
+   "fieldname": "credit_hours",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Credits",
+   "precision": "2"
+  },
+  {
+   "default": "Core",
+   "fieldname": "course_type",
+   "fieldtype": "Select",
+   "label": "Course Type",
+   "options": "Core\nElective\nLab\nProject\nInternship"
+  },
+  {
+   "columns": 1,
+   "default": "Registered",
+   "description": "Dropped and Withdrawn courses are excluded from the fee.",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Registered\nDropped\nWithdrawn"
+  },
+  {
+   "columns": 1,
+   "default": "0",
+   "fieldname": "is_repeat",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Repeat"
+  },
+  {
+   "fieldname": "column_break_reg_course",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "fee_basis",
+   "fieldtype": "Data",
+   "label": "Fee Basis",
+   "read_only": 1
+  },
+  {
+   "fieldname": "rate",
+   "fieldtype": "Currency",
+   "label": "Rate",
+   "options": "parent.currency",
+   "read_only": 1
+  },
+  {
+   "columns": 2,
+   "fieldname": "amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Amount",
+   "options": "parent.currency",
+   "read_only": 1
+  },
+  {
+   "fieldname": "fee_category",
+   "fieldtype": "Link",
+   "label": "Fee Category",
+   "options": "Fee Category",
+   "read_only": 1
+  },
+  {
+   "fieldname": "rate_source",
+   "fieldtype": "Data",
+   "label": "Rate Source",
+   "read_only": 1
+  },
+  {
+   "fieldname": "scheme_semester",
+   "fieldtype": "Int",
+   "label": "Scheme Semester",
+   "read_only": 1
+  }
+ ],
+ "istable": 1,
+ "links": [],
+ "modified": "2026-09-23 10:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Education",
+ "name": "Course Registration Course",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

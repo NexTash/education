@@ -12,6 +12,11 @@
   "hero_image",
   "column_break_3",
   "program_abbreviation",
+  "duration_years",
+  "no_of_semesters",
+  "section_break_study_scheme",
+  "study_scheme",
+  "total_credit_hours",
   "section_break_courses",
   "courses",
   "connections_tab"
@@ -47,12 +52,14 @@
    "fieldname": "courses",
    "fieldtype": "Table",
    "label": "Courses",
-   "options": "Program Course"
+   "options": "Program Course",
+   "description": "Superseded by Study Scheme. Retained for the structure-based fee engine and older reports."
   },
   {
    "fieldname": "section_break_courses",
    "fieldtype": "Section Break",
-   "label": "Courses"
+   "label": "Courses (Legacy)",
+   "collapsible": 1
   },
   {
    "fieldname": "connections_tab",
@@ -65,6 +72,38 @@
    "fieldtype": "Attach Image",
    "hidden": 1,
    "label": "Image"
+  },
+  {
+   "fieldname": "no_of_semesters",
+   "fieldtype": "Int",
+   "label": "No. of Semesters",
+   "default": "8",
+   "description": "Number of semesters in the full program. Drives the Study Scheme and semester-bounded fee components."
+  },
+  {
+   "fieldname": "duration_years",
+   "fieldtype": "Float",
+   "label": "Duration (Years)",
+   "precision": "1"
+  },
+  {
+   "fieldname": "section_break_study_scheme",
+   "fieldtype": "Section Break",
+   "label": "Study Scheme"
+  },
+  {
+   "fieldname": "study_scheme",
+   "fieldtype": "Table",
+   "label": "Study Scheme",
+   "options": "Program Study Scheme",
+   "description": "Semester-wise course plan. Copied onto each Program Enrollment at submit so later curriculum changes do not affect already-enrolled students."
+  },
+  {
+   "fieldname": "total_credit_hours",
+   "fieldtype": "Float",
+   "label": "Total Credit Hours",
+   "read_only": 1,
+   "precision": "2"
   }
  ],
  "image_field": "hero_image",
@@ -107,6 +146,11 @@
   {
    "group": "Assessment",
    "link_doctype": "Assessment Result",
+   "link_fieldname": "program"
+  },
+  {
+   "group": "Fee",
+   "link_doctype": "Fee Plan",
    "link_fieldname": "program"
   }
  ],

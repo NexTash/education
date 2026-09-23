@@ -14,6 +14,14 @@
   "academic_term_reqd",
   "user_creation_skip",
   "accounting_section",
+  "billing_section",
+  "fee_engine",
+  "billing_document",
+  "column_break_billing",
+  "auto_submit_fees",
+  "create_fee_on_course_registration",
+  "default_fee_due_days",
+  "legacy_billing_section",
   "create_so",
   "column_break_aimg",
   "auto_submit_sales_invoice",
@@ -22,6 +30,12 @@
   "sales_order_transaction_date_fee_schedule",
   "section_break_7",
   "instructor_created_by",
+  "challan_section",
+  "fee_challan_banks",
+  "fee_challan_note",
+  "column_break_challan",
+  "fee_challan_terms",
+  "late_fee_percent",
   "portal_settings_tab",
   "attendance_based_on_course_schedule",
   "razorpay_key",
@@ -93,7 +107,7 @@
   },
   {
    "default": "0",
-   "depends_on": "eval: !doc.create_so",
+   "depends_on": "eval:doc.fee_engine=='Structure Based'",
    "description": "By default, the Sales Invoice Created will be in Draft Mode. If enabled, the Sales Invoice will be submitted once created.",
    "fieldname": "auto_submit_sales_invoice",
    "fieldtype": "Check",
@@ -137,7 +151,7 @@
   },
   {
    "default": "1",
-   "depends_on": "eval: !doc.create_so",
+   "depends_on": "eval:doc.fee_engine=='Structure Based'",
    "description": "By default, the Sales Invoice's  Posting Date will be equal to Fee Schedule's Posting Date. If disabled then Sales Invoice's Posting Date will be today's date.",
    "fieldname": "sales_invoice_posting_date_fee_schedule",
    "fieldtype": "Check",
@@ -157,11 +171,12 @@
    "description": "By default, Sales Invoice will be created against Program Enrollment / Fee Schedule.\nIf enabled Sales Order will be created",
    "fieldname": "create_so",
    "fieldtype": "Check",
-   "label": "Create Sales Order instead of Sales Invoice"
+   "label": "Create Sales Order instead of Sales Invoice",
+   "depends_on": "eval:doc.fee_engine=='Structure Based'"
   },
   {
    "default": "0",
-   "depends_on": "eval: doc.create_so",
+   "depends_on": "eval:doc.fee_engine=='Structure Based'",
    "description": "By default, the Sales Order Created will be in Draft Mode. If enabled, the Sales Order will be submitted once created.",
    "fieldname": "auto_submit_sales_order",
    "fieldtype": "Check",
@@ -169,16 +184,106 @@
   },
   {
    "default": "1",
-   "depends_on": "eval: doc.create_so",
+   "depends_on": "eval:doc.fee_engine=='Structure Based'",
    "description": "By default, the Sales Order's  Transaction Date will be equal to Fee Schedule's Transaction Date. If disabled then Sales Order's Transaction Date will be today's date.",
    "fieldname": "sales_order_transaction_date_fee_schedule",
    "fieldtype": "Check",
    "label": "Sales Order Posting Date should be same as Fee Schedule Posting Date"
+  },
+  {
+   "fieldname": "billing_section",
+   "fieldtype": "Section Break",
+   "label": "Billing"
+  },
+  {
+   "fieldname": "fee_engine",
+   "fieldtype": "Select",
+   "label": "Fee Engine",
+   "default": "Course Based",
+   "options": "Course Based\nStructure Based",
+   "description": "Course Based prices each student from their Fee Plan and registered courses. Structure Based is the legacy Fee Structure / Fee Schedule flow."
+  },
+  {
+   "fieldname": "billing_document",
+   "fieldtype": "Select",
+   "label": "Billing Document",
+   "default": "Fees",
+   "options": "Fees\nSales Invoice\nSales Order",
+   "depends_on": "eval:doc.fee_engine=='Structure Based'",
+   "description": "Course Based billing always produces Fees."
+  },
+  {
+   "fieldname": "column_break_billing",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "auto_submit_fees",
+   "fieldtype": "Check",
+   "label": "Auto Submit Fees",
+   "default": "0"
+  },
+  {
+   "fieldname": "create_fee_on_course_registration",
+   "fieldtype": "Check",
+   "label": "Create Fee on Course Registration Submit",
+   "default": "1",
+   "description": "Raise the Fees document automatically when a Course Registration is submitted."
+  },
+  {
+   "fieldname": "default_fee_due_days",
+   "fieldtype": "Int",
+   "label": "Default Fee Due Days",
+   "default": "30",
+   "description": "Days after the posting date that a generated fee falls due."
+  },
+  {
+   "fieldname": "legacy_billing_section",
+   "fieldtype": "Section Break",
+   "label": "Structure Based Billing (Legacy)",
+   "collapsible": 1,
+   "depends_on": "eval:doc.fee_engine=='Structure Based'"
+  },
+  {
+   "fieldname": "challan_section",
+   "fieldtype": "Section Break",
+   "label": "Fee Challan",
+   "collapsible": 1
+  },
+  {
+   "fieldname": "fee_challan_banks",
+   "fieldtype": "Small Text",
+   "label": "Challan Banks",
+   "default": "ASKARI BANK|0111-0320200642\nUNITED BANK LIMITED|130701018977",
+   "description": "One bank per line as NAME|ACCOUNT NUMBER. Printed across the top of every challan copy."
+  },
+  {
+   "fieldname": "fee_challan_note",
+   "fieldtype": "Small Text",
+   "label": "Challan Deposit Note",
+   "default": "Please deposit your Fees in any branch of Askari Bank or United Bank Limited only"
+  },
+  {
+   "fieldname": "column_break_challan",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "fee_challan_terms",
+   "fieldtype": "Small Text",
+   "label": "Payment Terms",
+   "default": "Fees are non-refundable and non transferable.\nFee must be paid on or before the due date.",
+   "description": "One term per line."
+  },
+  {
+   "fieldname": "late_fee_percent",
+   "fieldtype": "Percent",
+   "label": "Late Fee (% of Tuition)",
+   "default": "6",
+   "description": "Printed on the challan as the amount payable after the due date. Charged once, no compounding."
   }
  ],
  "issingle": 1,
  "links": [],
- "modified": "2026-02-04 12:15:05.069346",
+ "modified": "2026-09-23 14:00:00.000000",
  "modified_by": "Administrator",
  "module": "Education",
  "name": "Education Settings",

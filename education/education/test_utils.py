@@ -274,3 +274,137 @@ def get_defaults(company_name="_Test Company"):
 		limit=1,
 	)[0]
 	return defaults
+
+
+def create_course_with_fee(
+	course_name,
+	credit_hours=3,
+	fee_basis="Per Credit Hour",
+	default_course_fee=0,
+	fee_category=None,
+):
+	if frappe.db.exists("Course", course_name):
+		course = frappe.get_doc("Course", course_name)
+	else:
+		course = frappe.new_doc("Course")
+		course.course_name = course_name
+
+	course.credit_hours = credit_hours
+	course.fee_basis = fee_basis
+	course.default_course_fee = default_course_fee
+	course.fee_category = fee_category
+	course.save()
+	return course
+
+
+def create_program_with_scheme(program_name, scheme, no_of_semesters=8):
+	"""scheme: list of dicts with semester, course and optionally course_type."""
+	if frappe.db.exists("Program", program_name):
+		program = frappe.get_doc("Program", program_name)
+		program.set("study_scheme", [])
+	else:
+		program = frappe.new_doc("Program")
+		program.program_name = program_name
+
+	program.no_of_semesters = no_of_semesters
+	for row in scheme:
+		program.append("study_scheme", row)
+	program.save()
+	return program
+
+
+def create_fee_plan(
+	plan_name,
+	company,
+	effective_from,
+	program=None,
+	tuition_basis="Per Credit Hour",
+	income_account=None,
+	rate_per_credit_hour=0,
+	flat_semester_tuition=0,
+	components=None,
+	course_rate_overrides=None,
+	repeat_course_rate=100,
+	elective_course_rate=100,
+	submit=True,
+):
+	if frappe.db.exists("Fee Plan", plan_name):
+		return frappe.get_doc("Fee Plan", plan_name)
+
+	plan = frappe.new_doc("Fee Plan")
+	plan.update(
+		{
+			"plan_name": plan_name,
+			"company": company,
+			"program": program,
+			"effective_from": effective_from,
+			"tuition_basis": tuition_basis,
+			"income_account": income_account,
+			"rate_per_credit_hour": rate_per_credit_hour,
+			"flat_semester_tuition": flat_semester_tuition,
+			"repeat_course_rate": repeat_course_rate,
+			"elective_course_rate": elective_course_rate,
+		}
+	)
+	for row in components or []:
+		plan.append("components", row)
+	for row in course_rate_overrides or []:
+		plan.append("course_rate_overrides", row)
+
+	plan.insert()
+	if submit:
+		plan.submit()
+	return plan
+
+
+def create_fee_category_with_accounts(category_name, company, income_account, cost_center):
+	if frappe.db.exists("Fee Category", category_name):
+		category = frappe.get_doc("Fee Category", category_name)
+	else:
+		category = frappe.new_doc("Fee Category")
+		category.category_name = category_name
+		category.insert()
+
+	category.set("item_defaults", [])
+	category.append(
+		"item_defaults",
+		{
+			"company": company,
+			"income_account": income_account,
+			"selling_cost_center": cost_center,
+		},
+	)
+	category.save()
+	return category
+
+
+def create_course_registration(
+	student,
+	program_enrollment,
+	academic_year,
+	academic_term,
+	semester=1,
+	company=None,
+	courses=None,
+	event_charges=None,
+	submit=False,
+):
+	registration = frappe.new_doc("Course Registration")
+	registration.update(
+		{
+			"student": student,
+			"program_enrollment": program_enrollment,
+			"academic_year": academic_year,
+			"academic_term": academic_term,
+			"semester": semester,
+			"company": company,
+			"event_charges": event_charges,
+		}
+	)
+	for row in courses or []:
+		registration.append("courses", row)
+
+	registration.insert()
+	if submit:
+		registration.submit()
+	return registration

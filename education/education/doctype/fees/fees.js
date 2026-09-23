@@ -15,6 +15,9 @@ frappe.ui.form.on('Fees', {
         },
       }
     })
+    frm.set_query('fee_plan', function (doc) {
+      return { filters: { program: doc.program, docstatus: 1, disabled: 0 } }
+    })
     frm.set_query('fee_structure', function () {
       return {
         filters: {
@@ -64,6 +67,15 @@ frappe.ui.form.on('Fees', {
     } else {
       frm.set_df_property('posting_date', 'read_only', 1)
       frm.set_df_property('posting_time', 'read_only', 1)
+    }
+    if (frm.doc.course_registration) {
+      frm.add_custom_button(
+        __('Course Registration'),
+        function () {
+          frappe.set_route('Form', 'Course Registration', frm.doc.course_registration)
+        },
+        __('View')
+      )
     }
     if (frm.doc.docstatus > 0) {
       frm.add_custom_button(
@@ -118,6 +130,7 @@ frappe.ui.form.on('Fees', {
       frm.set_value('program_enrollment', '')
       frm.set_value('program', '')
       frm.set_value('fee_structure', '')
+      frm.set_value('fee_plan', '')
     }
   },
 

@@ -24,6 +24,13 @@
   "enrolled_courses",
   "courses",
   "fees_tab",
+  "fee_plan",
+  "current_semester",
+  "column_break_fee_plan",
+  "fee_plan_tuition_basis",
+  "total_credit_hours",
+  "section_break_study_scheme",
+  "study_scheme",
   "section_break_7",
   "fees",
   "amended_from",
@@ -116,13 +123,16 @@
   },
   {
    "fieldname": "section_break_7",
-   "fieldtype": "Section Break"
+   "fieldtype": "Section Break",
+   "label": "Fee Schedules (Legacy)",
+   "collapsible": 1
   },
   {
    "fieldname": "fees",
    "fieldtype": "Table",
    "label": "Fees",
-   "options": "Program Fee"
+   "options": "Program Fee",
+   "description": "Structure-based fee engine only. The course-based engine bills through Course Registration."
   },
   {
    "fieldname": "amended_from",
@@ -164,6 +174,55 @@
    "fieldtype": "Link",
    "label": "School House",
    "options": "School House"
+  },
+  {
+   "fieldname": "fee_plan",
+   "fieldtype": "Link",
+   "label": "Fee Plan",
+   "options": "Fee Plan",
+   "allow_on_submit": 0,
+   "no_copy": 1,
+   "description": "The rate card in force when this student enrolled. Locked at submit so later price changes never reach this cohort."
+  },
+  {
+   "fieldname": "current_semester",
+   "fieldtype": "Int",
+   "label": "Current Semester",
+   "default": "1",
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "column_break_fee_plan",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "fee_plan_tuition_basis",
+   "fieldtype": "Data",
+   "label": "Tuition Basis",
+   "read_only": 1,
+   "fetch_from": "fee_plan.tuition_basis",
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "total_credit_hours",
+   "fieldtype": "Float",
+   "label": "Total Credit Hours",
+   "read_only": 1,
+   "precision": "2",
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "section_break_study_scheme",
+   "fieldtype": "Section Break",
+   "label": "Study Scheme"
+  },
+  {
+   "fieldname": "study_scheme",
+   "fieldtype": "Table",
+   "label": "Study Scheme",
+   "options": "Student Study Scheme",
+   "allow_on_submit": 1,
+   "description": "Copied from the Program at submit. Editing the Program later does not change this student's plan or price."
   }
  ],
  "image_field": "image",
@@ -172,6 +231,11 @@
   {
    "group": "Enrollment",
    "link_doctype": "Course Enrollment",
+   "link_fieldname": "program_enrollment"
+  },
+  {
+   "group": "Fee",
+   "link_doctype": "Course Registration",
    "link_fieldname": "program_enrollment"
   }
  ],
