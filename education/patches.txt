@@ -24,3 +24,4 @@ education.patches.v16_0.set_fees_status
 education.patches.v16_0.set_education_billing_defaults
 education.patches.v16_0.set_fee_challan_defaults
 education.patches.v16_0.repair_fees_outstanding
+education.patches.v16_0.create_registrar_and_accountant_roles
